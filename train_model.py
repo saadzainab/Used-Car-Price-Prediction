@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -92,7 +93,7 @@ sns.barplot(x=results_df.index, y=results_df["R2 Score"])
 plt.xticks(rotation=45)
 plt.title("Model Performance Comparison (R2 Score)")
 plt.savefig("outputs/model_comparison_r2.png", bbox_inches="tight")
-#plt.show()
+plt.show()
 
 best_model = results_df["R2 Score"].idxmax()
 print("\nBest baseline model:", best_model)
@@ -132,3 +133,25 @@ print("MAE:", mae, "| RMSE:", rmse, "| R2 Score:", r2)
 
 joblib.dump(best_rf, MODEL_PATH)
 print(f"\nModel saved to: {MODEL_PATH}")
+
+# ============================================================
+# Save metrics (used by the Streamlit "Model Performance" page)
+# ============================================================
+
+metrics = {
+    "train_samples": int(X_train.shape[0]),
+    "test_samples": int(X_test.shape[0]),
+    "baseline_results": results,
+    "best_baseline_model": best_model,
+    "tuned_random_forest": {
+        "best_params": grid_search.best_params_,
+        "MAE": mae,
+        "RMSE": rmse,
+        "R2 Score": r2,
+    },
+}
+
+with open("outputs/metrics.json", "w") as f:
+    json.dump(metrics, f, indent=2, default=str)
+
+print("Metrics saved to: outputs/metrics.json")

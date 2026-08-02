@@ -1,0 +1,37 @@
+{
+  "train_samples": 7182,
+  "test_samples": 1796,
+  "baseline_results": {
+    "Linear Regression": {
+      "MAE": 251384.61133393418,
+      "RMSE": 346370.239936981,
+      "R2 Score": 0.9103927940554221
+    },
+    "Decision Tree": {
+      "MAE": 205819.08964365255,
+      "RMSE": 301423.3429363993,
+      "R2 Score": 0.9321397337955494
+    },
+    "Random Forest": {
+      "MAE": 164423.07516472955,
+      "RMSE": 239227.91583217253,
+      "R2 Score": 0.9572549816150094
+    },
+    "Gradient Boosting": {
+      "MAE": 207231.97369126978,
+      "RMSE": 289327.4647684228,
+      "R2 Score": 0.9374768114619889
+    }
+  },
+  "best_baseline_model": "Random Forest",
+  "tuned_random_forest": {
+    "best_params": {
+      "model__max_depth": 20,
+      "model__min_samples_split": 5,
+      "model__n_estimators": 300
+    },
+    "MAE": 160184.0999366247,
+    "RMSE": 233557.54848491846,
+    "R2 Score": 0.95925731830664
+  }
+}
